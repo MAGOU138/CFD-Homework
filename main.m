@@ -11,18 +11,18 @@ gamma=1.4;
 
 % Sod 激波管初值条件
 rho_L=1.0;
-  u_L=-2.0;
-  p_L=0.4;
-rho_R=1.0;
-  u_R=2.0;
-  p_R=0.4;
+  u_L=0.0;
+  p_L=1.0;
+rho_R=0.125;
+  u_R=0.0;
+  p_R=0.1;
 
 % 时间、空间范围离散
-T=0.25;
+T=0.14;
 dT=1.e-3;
 t=dT:dT:T;
 
-L=1;
+L=0.5;
 dL=1.e-3;
 x=-L:dL:L;
 
@@ -127,31 +127,49 @@ end
 
 for i=1:length(t)
     figure(1);
-    plot(x,rho(i,:),'.-');
-    legend('$\rho$','interpreter','latex');
-    xlabel('$x$','interpreter','latex');
-    ylabel('$\rho$','interpreter','latex');
-    title(strcat('$t=',num2str(t(i)),'$'),'interpreter','latex');
+    color=[54,100,139]/255;
+    x1=min(x);
+    x2=max(x);
+    y1=min(rho(1,:))-0.1*(max(rho(1,:))-min(rho(1,:)));
+    y2=max(rho(1,:))+0.1*(max(rho(1,:))-min(rho(1,:)));
+    plot(x,rho(i,:),'.-','color',color);
+    axis([x1,x2,y1,y2]);
+    %legend('$\rho$','interpreter','latex','fontsize',13);
+    xlabel('$x$','interpreter','latex','fontsize',13);
+    ylabel('$\rho$','interpreter','latex','fontsize',13);
+    title(strcat('$t=',num2str(t(i)),'$'),'interpreter','latex','fontsize',13);
     M_rho(i)=getframe;
 end
 
 for i=1:length(t)
     figure(2);
-    plot(x,u(i,:),'.-');
-    legend('$u$','interpreter','latex');
-    xlabel('$x$','interpreter','latex');
-    ylabel('$u$','interpreter','latex');
-    title(strcat('$t=',num2str(t(i)),'$'),'interpreter','latex');
+    color=[238,201,0]/255;
+    x1=min(x);
+    x2=max(x);
+    y1=min(u(1,:))-0.1*(max(u(1,:))-min(u(1,:)));
+    y2=max(u(1,:))+0.1*(max(u(1,:))-min(u(1,:)));
+    plot(x,u(i,:),'.-','color',color);
+    axis([x1,x2,y1,y2]);
+    %legend('$u$','interpreter','latex','fontsize',13);
+    xlabel('$x$','interpreter','latex','fontsize',13);
+    ylabel('$u$','interpreter','latex','fontsize',13);
+    title(strcat('$t=',num2str(t(i)),'$'),'interpreter','latex','fontsize',13);
     M_u(i)=getframe;
 end
     
 for i=1:length(t)
     figure(3);
-    plot(x,p(i,:),'.-');
-    legend('$p$','interpreter','latex');
-    xlabel('$x$','interpreter','latex');
-    ylabel('$p$','interpreter','latex');
-    title(strcat('$t=',num2str(t(i)),'$'),'interpreter','latex');
+    color=[255,48,48]/255;
+    x1=min(x);
+    x2=max(x);
+    y1=min(p(1,:))-0.1*(max(p(1,:))-min(p(1,:)));
+    y2=max(p(1,:))+0.1*(max(p(1,:))-min(p(1,:)));
+    plot(x,p(i,:),'.-','color',color);
+    axis([x1,x2,y1,y2]);
+    %legend('$p$','interpreter','latex','fontsize',13);
+    xlabel('$x$','interpreter','latex','fontsize',13);
+    ylabel('$p$','interpreter','latex','fontsize',13);
+    title(strcat('$t=',num2str(t(i)),'$'),'interpreter','latex','fontsize',13);
     M_p(i)=getframe;
 end
 
